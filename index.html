@@ -13,12 +13,12 @@
         }
         body {
             background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 50%, #ff758c 100%);
-            height: 100vh;
+            min-height: 100vh;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            overflow: hidden;
+            overflow-x: hidden;
             text-align: center;
             padding: 20px;
             position: relative;
@@ -122,28 +122,61 @@
             height: 30px;
             font-weight: 600;
         }
+
+        /* Success Screen with Promises */
         .success-screen {
             display: none;
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            max-width: 400px;
+            max-width: 450px;
             width: 100%;
             z-index: 10;
-            background: rgba(255, 255, 255, 0.9);
+            background: rgba(255, 255, 255, 0.92);
             padding: 30px 20px;
             border-radius: 25px;
-            box-shadow: 0 10px 30px rgba(214, 51, 132, 0.2);
+            box-shadow: 0 10px 30px rgba(214, 51, 132, 0.25);
+            margin: 20px 0;
         }
         .success-screen h1 {
-            font-size: 26px;
+            font-size: 23px;
             color: #ff007f;
-            animation: bounce 1s infinite alternate;
             margin-bottom: 15px;
+            line-height: 1.4;
         }
-        @keyframes bounce {
-            from { transform: translateY(0); }
-            to { transform: translateY(-8px); }
+        .promises-box {
+            text-align: left;
+            width: 100%;
+            background: #fff0f3;
+            padding: 20px;
+            border-radius: 15px;
+            margin-top: 10px;
+            border: 2px dashed #ff4d6d;
+        }
+        .promises-box h3 {
+            color: #c9184a;
+            font-size: 18px;
+            margin-bottom: 12px;
+            text-align: center;
+        }
+        .promises-box ul {
+            list-style-type: none;
+            padding-left: 0;
+        }
+        .promises-box li {
+            font-size: 14.5px;
+            color: #590d22;
+            margin-bottom: 10px;
+            line-height: 1.5;
+            position: relative;
+            padding-left: 22px;
+        }
+        .promises-box li::before {
+            content: "💖";
+            position: absolute;
+            left: 0;
+            font-size: 12px;
+            top: 2px;
         }
 
         /* Romantic Modal Popup */
@@ -189,6 +222,7 @@
             border-radius: 20px;
             border: none;
             cursor: pointer;
+            font-weight: bold;
         }
     </style>
 </head>
@@ -235,13 +269,13 @@
     <div class="modal" id="loveModal">
         <div class="modal-content">
             <h3>ရင်ခုန်သံအစစ်ပါ 💖</h3>
-            <p>မင်းက ကိုယ့်ရဲ့ တစ်ဦးတည်းသော အချစ်ဆုံးလေးပါပဲ ကလေးရယ်... 🥰</p>
-            <button onclick="goToSuccess()">ပျော်စရာလေးတွေ ကြည့်မယ် ✨</button>
+            <p>အကို့ရဲ့အချစ်ကို လက်ခံပြီဆိုတော့ အကို့ရဲ့ ကတိနဲ့သစ္စာတွေကို ပြောပြမယ်နော် 🥰</p>
+            <button onclick="goToSuccess()">ကတိကဝတ်တွေ ကြည့်မယ် ✨</button>
         </div>
     </div>
 
     <div class="success-screen" id="successScreen">
-        <svg class="illustration" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+        <svg class="illustration" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" style="width: 120px; height: 120px; margin-bottom: 10px;">
             <circle cx="100" cy="100" r="100" fill="#fff0f3"/>
             <g transform="translate(30, 30)">
                 <path d="M70,15 C55,-2 30,-2 15,15 C0,32 10,55 70,95 C130,55 140,32 125,15 C110,-2 85,-2 70,15 Z" fill="#ff4d6d" opacity="0.7"/>
@@ -253,7 +287,17 @@
         </svg>
         
         <h1>ယေးးး! အကို့ကိုချစ်တယ်ဆိုတာ သိပြီးသားပါဗျာ 😍💖</h1>
-        <p style="font-size: 16px; color: #590d22; margin-top: 10px; line-height: 1.5;">အမြဲတမ်း ပျော်ရွှင်ရအောင် အကို ထိန်းသိမ်းပေးသွားပါမယ် ချစ်ရဆုံးရေ 🥰</p>
+        
+        <div class="promises-box">
+            <h3>✨ ကလေးလေးအတွက် အကို့ရဲ့ ကတိကဝတ်များ ✨</h3>
+            <ul>
+                <li>ကလေးလေး တစ်ယောက်တည်းကိုပဲ အမြဲချစ်သွားပါ့မယ်။</li>
+                <li>ကလေးလေးကို အတတ်နိုင်ဆုံးနဲ့ ပျော်ရွှင်မှုတွေ ဖန်တီးပေးမယ်။</li>
+                <li>အရေးကြီးတာက ဘယ်တော့မှ မဖောက်ပြန်ဘူးလို့ ကတိပေးပါတယ်ဗျ။</li>
+                <li>ကလေးလေး ကိုနဲ့ရှိနေရင် ဘယ်တော့မှ နောင်တမရစေရဘူးလို့ ကတိပေးပါတယ်ဗျ။</li>
+                <li>ကလေးလေးကိုလည်း တစ်သက်လုံး အလိုလိုက်ပေးပါ့မယ်ဗျ။</li>
+            </ul>
+        </div>
     </div>
 
     <script>
@@ -276,7 +320,6 @@
             }
         }
 
-        // Auto play music on first user interaction if blocked by browser
         document.body.addEventListener('click', function() {
             if (!isMusicPlaying) {
                 bgMusic.play().then(() => {
@@ -286,7 +329,6 @@
             }
         }, { once: true });
 
-        // Generate Falling Hearts Automatically
         function createHeart() {
             const heart = document.createElement('div');
             heart.classList.add('heart-fall');
