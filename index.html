@@ -24,6 +24,23 @@
             position: relative;
         }
         
+        /* Music Toggle Button Style */
+        .music-btn {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: rgba(255, 255, 255, 0.8);
+            border: 2px solid #ff4d6d;
+            border-radius: 50px;
+            padding: 8px 15px;
+            cursor: pointer;
+            font-size: 14px;
+            color: #c9184a;
+            font-weight: bold;
+            z-index: 100;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+
         /* Falling Hearts Background Animation */
         .heart-fall {
             position: absolute;
@@ -78,7 +95,7 @@
             min-height: 80px;
             width: 100%;
         }
-        button {
+        button.action-btn {
             padding: 12px 28px;
             font-size: 18px;
             border: none;
@@ -170,16 +187,25 @@
             padding: 8px 20px;
             font-size: 16px;
             border-radius: 20px;
+            border: none;
+            cursor: pointer;
         }
     </style>
 </head>
 <body>
 
+    <!-- Background Music (Romantic Instrumental) -->
+    <audio id="bgMusic" loop>
+        <source src="https://actions.google.com/sounds/v1/ambiences/romantic_music.ogg" type="audio/ogg">
+    </audio>
+
+    <!-- Music Control Button -->
+    <button class="music-btn" id="musicBtn" onclick="toggleMusic()">🎵 သီချင်းဖွင့်မည်</button>
+
     <!-- Falling Hearts Container -->
     <div id="heartsContainer"></div>
 
     <div class="container" id="mainContainer">
-        <!-- ယောက်ျားလေး ပန်းစည်းနဲ့ တောင်းပန်နေတဲ့ ချစ်စရာ ပုံ -->
         <svg class="illustration" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
             <circle cx="100" cy="100" r="100" fill="#fff0f3"/>
             <g transform="translate(40, 35)">
@@ -199,8 +225,8 @@
         
         <h1>ကလေးလေး... အကို့ရဲ့အချစ်ကို လက်ခံပြီး ပြန်ချစ်နိုင်မလား 💕</h1>
         <div class="btn-group" id="btnGroup">
-            <button id="yesBtn" onclick="showLovePopup()">Yes 🥰</button>
-            <button id="noBtn" onclick="sayNo()">No 😢</button>
+            <button id="yesBtn" class="action-btn" onclick="showLovePopup()">Yes 🥰</button>
+            <button id="noBtn" class="action-btn" onclick="sayNo()">No 😢</button>
         </div>
         <div id="pleadText"></div>
     </div>
@@ -215,7 +241,6 @@
     </div>
 
     <div class="success-screen" id="successScreen">
-        <!-- ချစ်စရာ စုံတွဲ ရိုမန်တစ်ပုံ -->
         <svg class="illustration" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
             <circle cx="100" cy="100" r="100" fill="#fff0f3"/>
             <g transform="translate(30, 30)">
@@ -232,6 +257,35 @@
     </div>
 
     <script>
+        const bgMusic = document.getElementById('bgMusic');
+        const musicBtn = document.getElementById('musicBtn');
+        let isMusicPlaying = false;
+
+        function toggleMusic() {
+            if (isMusicPlaying) {
+                bgMusic.pause();
+                musicBtn.innerText = "🎵 သီချင်းဖွင့်မည်";
+                isMusicPlaying = false;
+            } else {
+                bgMusic.play().then(() => {
+                    musicBtn.innerText = "🔇 သီချင်းပိတ်မည်";
+                    isMusicPlaying = true;
+                }).catch(e => {
+                    console.log("Audio play blocked:", e);
+                });
+            }
+        }
+
+        // Auto play music on first user interaction if blocked by browser
+        document.body.addEventListener('click', function() {
+            if (!isMusicPlaying) {
+                bgMusic.play().then(() => {
+                    musicBtn.innerText = "🔇 သီချင်းပိတ်မည်";
+                    isMusicPlaying = true;
+                }).catch(e => {});
+            }
+        }, { once: true });
+
         // Generate Falling Hearts Automatically
         function createHeart() {
             const heart = document.createElement('div');
