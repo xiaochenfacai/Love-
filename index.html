@@ -232,13 +232,13 @@
 </head>
 <body>
 
-    <!-- Background Music (Reliable Audio Stream) -->
+    <!-- Background Music -->
     <audio id="bgMusic" loop preload="auto">
         <source src="https://cdn.pixabay.com/download/audio/2022/05/16/audio_db32768078.mp3?filename=romantic-love-story-112195.mp3" type="audio/mpeg">
     </audio>
 
     <!-- Music Control Button -->
-    <button class="music-btn" id="musicBtn" onclick="toggleMusic()">🎵 သီချင်းဖွင့်မည်</button>
+    <button class="music-btn" id="musicBtn" onclick="toggleMusic()">🎵 Song</button>
 
     <!-- Falling Hearts Container -->
     <div id="heartsContainer"></div>
@@ -309,18 +309,39 @@
         const musicBtn = document.getElementById('musicBtn');
         let isMusicPlaying = false;
 
+        // Auto play on page load (with browser policy handling)
+        window.addEventListener('DOMContentLoaded', () => {
+            bgMusic.play().then(() => {
+                isMusicPlaying = true;
+                musicBtn.innerText = "🔇 Song";
+            }).catch(error => {
+                console.log("Auto-play prevented by browser, waiting for user interaction.");
+                isMusicPlaying = false;
+                musicBtn.innerText = "🎵 Song";
+            });
+        });
+
+        // Fallback: Play on any first click on the page if autoplay was blocked
+        document.body.addEventListener('click', function initAudio() {
+            if (!isMusicPlaying) {
+                bgMusic.play().then(() => {
+                    isMusicPlaying = true;
+                    musicBtn.innerText = "🔇 Song";
+                }).catch(e => {});
+            }
+        }, { once: true });
+
         function toggleMusic() {
             if (isMusicPlaying) {
                 bgMusic.pause();
-                musicBtn.innerText = "🎵 သီချင်းဖွင့်မည်";
+                musicBtn.innerText = "🎵 Song";
                 isMusicPlaying = false;
             } else {
                 bgMusic.play().then(() => {
-                    musicBtn.innerText = "🔇 သီချင်းပိတ်မည်";
+                    musicBtn.innerText = "🔇 Song";
                     isMusicPlaying = true;
                 }).catch(error => {
                     console.log("Play failed:", error);
-                    alert("ဖုန်း (သို့) ဘရောက်ဇာ ဆက်တင်ကြောင့် အသံဖွင့်မရသေးပါ။ စာမျက်နှာကို တစ်ချက်လောက်တို့ပြီးမှ (သို့) ခလုတ်ကို ထပ်နှိပ်ကြည့်ပါနော်။");
                 });
             }
         }
