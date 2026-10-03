@@ -23,27 +23,6 @@
             padding: 20px;
             position: relative;
         }
-        
-        /* Music Toggle Button Style */
-        .music-btn {
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            background: rgba(255, 255, 255, 0.9);
-            border: 2px solid #ff4d6d;
-            border-radius: 50px;
-            padding: 8px 16px;
-            cursor: pointer;
-            font-size: 14px;
-            color: #c9184a;
-            font-weight: bold;
-            z-index: 100;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.15);
-            transition: all 0.2s;
-        }
-        .music-btn:active {
-            transform: scale(0.95);
-        }
 
         /* Falling Hearts Background Animation */
         .heart-fall {
@@ -232,14 +211,6 @@
 </head>
 <body>
 
-    <!-- Background Music -->
-    <audio id="bgMusic" loop preload="auto">
-        <source src="https://actions.google.com/sounds/v1/ambiences/romantic_music.ogg" type="audio/ogg">
-    </audio>
-
-    <!-- Music Control Button -->
-    <button class="music-btn" id="musicBtn" onclick="toggleMusic()">🎵 Song</button>
-
     <!-- Falling Hearts Container -->
     <div id="heartsContainer"></div>
 
@@ -305,47 +276,6 @@
     </div>
 
     <script>
-        const bgMusic = document.getElementById('bgMusic');
-        const musicBtn = document.getElementById('musicBtn');
-        let isMusicPlaying = false;
-
-        // Auto play on page load
-        window.addEventListener('load', () => {
-            bgMusic.play().then(() => {
-                isMusicPlaying = true;
-                musicBtn.innerText = "🔇 Song";
-            }).catch(error => {
-                console.log("Auto-play blocked, waiting for user touch.");
-                isMusicPlaying = false;
-                musicBtn.innerText = "🎵 Song";
-            });
-        });
-
-        // Trigger music on any screen touch/click if blocked
-        document.body.addEventListener('click', function startAudio() {
-            if (!isMusicPlaying) {
-                bgMusic.play().then(() => {
-                    isMusicPlaying = true;
-                    musicBtn.innerText = "🔇 Song";
-                }).catch(e => {});
-            }
-        }, { once: true });
-
-        function toggleMusic() {
-            if (isMusicPlaying) {
-                bgMusic.pause();
-                musicBtn.innerText = "🎵 Song";
-                isMusicPlaying = false;
-            } else {
-                bgMusic.play().then(() => {
-                    musicBtn.innerText = "🔇 Song";
-                    isMusicPlaying = true;
-                }).catch(error => {
-                    console.log("Play failed:", error);
-                });
-            }
-        }
-
         function createHeart() {
             const heart = document.createElement('div');
             heart.classList.add('heart-fall');
@@ -380,7 +310,7 @@
             const randomIndex = Math.floor(Math.random() * pleadings.length);
             document.getElementById('pleadText').innerText = pleadings[randomIndex];
 
-            yesBtnSize += 0.3;
+5          yesBtnSize += 0.3;
             const yesBtn = document.getElementById('yesBtn');
             yesBtn.style.transform = `scale(${yesBtnSize})`;
 
