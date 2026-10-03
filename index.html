@@ -29,16 +29,20 @@
             position: absolute;
             top: 20px;
             right: 20px;
-            background: rgba(255, 255, 255, 0.8);
+            background: rgba(255, 255, 255, 0.9);
             border: 2px solid #ff4d6d;
             border-radius: 50px;
-            padding: 8px 15px;
+            padding: 8px 16px;
             cursor: pointer;
             font-size: 14px;
             color: #c9184a;
             font-weight: bold;
             z-index: 100;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+            transition: all 0.2s;
+        }
+        .music-btn:active {
+            transform: scale(0.95);
         }
 
         /* Falling Hearts Background Animation */
@@ -228,9 +232,9 @@
 </head>
 <body>
 
-    <!-- Background Music (Romantic Instrumental) -->
-    <audio id="bgMusic" loop>
-        <source src="https://actions.google.com/sounds/v1/ambiences/romantic_music.ogg" type="audio/ogg">
+    <!-- Background Music (Reliable Audio Stream) -->
+    <audio id="bgMusic" loop preload="auto">
+        <source src="https://cdn.pixabay.com/download/audio/2022/05/16/audio_db32768078.mp3?filename=romantic-love-story-112195.mp3" type="audio/mpeg">
     </audio>
 
     <!-- Music Control Button -->
@@ -314,20 +318,12 @@
                 bgMusic.play().then(() => {
                     musicBtn.innerText = "🔇 သီချင်းပိတ်မည်";
                     isMusicPlaying = true;
-                }).catch(e => {
-                    console.log("Audio play blocked:", e);
+                }).catch(error => {
+                    console.log("Play failed:", error);
+                    alert("ဖုန်း (သို့) ဘရောက်ဇာ ဆက်တင်ကြောင့် အသံဖွင့်မရသေးပါ။ စာမျက်နှာကို တစ်ချက်လောက်တို့ပြီးမှ (သို့) ခလုတ်ကို ထပ်နှိပ်ကြည့်ပါနော်။");
                 });
             }
         }
-
-        document.body.addEventListener('click', function() {
-            if (!isMusicPlaying) {
-                bgMusic.play().then(() => {
-                    musicBtn.innerText = "🔇 သီချင်းပိတ်မည်";
-                    isMusicPlaying = true;
-                }).catch(e => {});
-            }
-        }, { once: true });
 
         function createHeart() {
             const heart = document.createElement('div');
