@@ -1,157 +1,155 @@
 <!DOCTYPE html>
 <html lang="my">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
-  <title>ကလေးလေး... ပြန်ချစ်နိုင်မလား</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Myanmar:wght@400;500;600;700&family=Quicksand:wght@500;700&display=swap" rel="stylesheet" />
-  <style>
-    :root {
-      --rose: #ff4d6d;
-      --rose-deep: #c9184a;
-      --blush: #ffb3c1;
-      --cream: #fff5f7;
-      --ink: #4a1942;
-    }
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-    html, body {
-      min-height: 100%;
-      height: 100%;
-    }
-    body {
-      font-family: "Noto Sans Myanmar", "Quicksand", sans-serif;
-      color: var(--ink);
-      overflow: hidden;
-      background:
-        radial-gradient(1200px 800px at 10% -10%, #ffe0ec 0%, transparent 55%),
-        radial-gradient(900px 700px at 110% 10%, #ffd6e7 0%, transparent 50%),
-        linear-gradient(160deg, #fff0f5 0%, #ffd1dc 42%, #f8bbd0 100%);
-    }
-    .bg-hearts {
-      position: fixed;
-      inset: 0;
-      pointer-events: none;
-      overflow: hidden;
-      z-index: 0;
-    }
-    .bg-hearts span {
-      position: absolute;
-      color: #ff6b8a;
-      opacity: 0.18;
-      animation: floatUp linear infinite;
-      user-select: none;
-    }
-    @keyframes floatUp {
-      0% { transform: translateY(20vh) rotate(0deg); opacity: 0; }
-      12% { opacity: 0.22; }
-      100% { transform: translateY(-110vh) rotate(40deg); opacity: 0; }
-    }
-    .stage {
-      position: relative;
-      z-index: 1;
-      min-height: 100%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 24px 16px 96px;
-    }
-    .card {
-      width: min(560px, 100%);
-      background: rgba(255, 255, 255, 0.72);
-      backdrop-filter: blur(18px);
-      -webkit-backdrop-filter: blur(18px);
-      border: 1px solid rgba(255, 255, 255, 0.85);
-      border-radius: 28px;
-      padding: 36px 28px 32px;
-      text-align: center;
-      box-shadow:
-        0 20px 50px rgba(201, 24, 74, 0.16),
-        0 2px 0 rgba(255, 255, 255, 0.8) inset;
-      animation: cardIn 0.7s ease both;
-    }
-    @keyframes cardIn {
-      from { opacity: 0; }
-      to { opacity: 1; }
-    }
-    .badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      background: #fff;
-      color: var(--rose-deep);
-      border-radius: 999px;
-      padding: 6px 14px;
-      font-size: 13px;
-      font-weight: 600;
-      letter-spacing: 0.02em;
-      margin-bottom: 18px;
-      box-shadow: 0 8px 20px rgba(255, 77, 109, 0.12);
-    }
-    h1 {
-      font-size: clamp(1.35rem, 4.4vw, 1.85rem);
-      line-height: 1.7;
-      font-weight: 700;
-      margin-bottom: 10px;
-    }
-    .sub {
-      color: #8a4a62;
-      font-size: 0.95rem;
-      line-height: 1.7;
-      margin-bottom: 28px;
-    }
-    .actions {
-      position: relative;
-      min-height: 92px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 14px;
-      flex-wrap: wrap;
-    }
-    .btn {
-      font-family: inherit;
-      border: 0;
-      cursor: pointer;
-      border-radius: 999px;
-      font-weight: 700;
-      font-size: 1.05rem;
-      line-height: 1.4;
-      padding: 14px 26px;
-      transition: transform 0.25s ease, box-shadow 0.25s ease, font-size 0.25s ease, padding 0.25s ease;
-      user-select: none;
-      -webkit-tap-highlight-color: transparent;
-    }
-    .btn-yes {
-      position: relative;
-      z-index: 5;
-      color: #fff;
-      background: linear-gradient(135deg, #ff6b8a 0%, #c9184a 100%);
-      box-shadow: 0 12px 24px rgba(201, 24, 74, 0.32);
-      transform-origin: center center;
-    }
-    .btn-yes:hover {
-      transform: scale(calc(var(--yes-scale, 1) * 1.03));
-    }
-    .btn-no {
-      position: relative;
-      z-index: 6;
-      color: var(--rose-deep);
-      background: #fff;
-      border: 1.5px solid #ffb3c1;
-      box-shadow: 0 8px 18px rgba(255, 179, 193, 0.35);
-    }
-    .btn-no.fleeing {
-      position: fixed;
-      z-index: 40;
-    }
-    .plea {
-      position: fixed;
-      left: 50%;
-      bottom: 22px;
-      transform: translateX(-50%);
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ကလေးလေး ကိုယ့်ကို ပြန်ချစ်နိုင်မလား</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Pyidaungsu', 'Myanmar Text', sans-serif;
+        }
+        body {
+            background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 99%, #fecfef 100%);
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            text-align: center;
+            padding: 20px;
+        }
+        .container {
+            max-width: 400px;
+            width: 100%;
+            z-index: 10;
+        }
+        h1 {
+            font-size: 24px;
+            color: #d63384;
+            margin-bottom: 30px;
+            line-height: 1.5;
+        }
+        .btn-group {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+            position: relative;
+            min-height: 80px;
+        }
+        button {
+            padding: 12px 24px;
+            font-size: 18px;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.2s ease;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+        #yesBtn {
+            background-color: #ff4d6d;
+            color: white;
+            z-index: 2;
+        }
+        #noBtn {
+            background-color: #adb5bd;
+            color: white;
+            position: relative;
+        }
+        #pleadText {
+            margin-top: 30px;
+            font-size: 16px;
+            color: #c9184a;
+            height: 30px;
+            font-weight: 600;
+        }
+        .success-screen {
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        .success-screen h1 {
+            font-size: 32px;
+            color: #ff007f;
+            animation: bounce 1s infinite alternate;
+        }
+        @keyframes bounce {
+            from { transform: translateY(0); }
+            to { transform: translateY(-10px); }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container" id="mainContainer">
+        <h1>ကလေးလေး အကို့ရဲ့အချစ်ကိုလက်ခံပြီး ပြန်ချစ်နိုင်မလား 💕</h1>
+        <div class="btn-group" id="btnGroup">
+            <button id="yesBtn" onclick="sayYes()">လက်ခံပါတယ် 🥰</button>
+            <button id="noBtn" onclick="sayNo()">ငင်းမယ် 😢</button>
+        </div>
+        <div id="pleadText"></div>
+    </div>
+
+    <div class="success-screen" id="successScreen">
+        <h1>ယေးးး! ကိုယ့်ကိုချစ်တယ်ဆိုတာ သိပြီးသားပါရှင် 😍💖</h1>
+        <p style="font-size: 18px; color: #590d22; margin-top: 15px;">အမြဲတမ်း ပျော်ရွှင်ရအောင် ထိန်းသိမ်းပေးသွားပါမယ် ချစ်ရဆုံးရေ 🥰</p>
+    </div>
+
+    <script>
+        const pleadings = [
+            "စဉ်းစားပါဦးနော်... လှည့်တောင် မကြည့်ဘူးလား 🥺",
+            "နောက်တစ်ခါ ထပ်စမ်းကြည့်ပါဦး ကလေးရယ် 😭",
+            "ငါ့ကို ဒီလောက်တောင် ရက်စက်ရလား ဟင် 💔",
+            "မလုပ်နဲ့လေ နော် နော်... 😣",
+            "ဒီခလုတ်ကို နှိပ်လို့ မရဘူးလေ 😜",
+            "သနားကွင်းလေး ဘက်ကနေ စဉ်းစားပေးပါဦး 😿",
+            "တောင်းပန်ပါတယ်ဗျာ... Yes ကိုပဲ နှိပ်လိုက်ပါတော့နော် 💖"
+        ];
+
+        let noClickCount = 0;
+        let yesBtnSize = 1;
+
+        function sayNo() {
+            noClickCount++;
+            
+            // Show plead text
+            const randomIndex = Math.floor(Math.random() * pleadings.length);
+            document.getElementById('pleadText').innerText = pleadings[randomIndex];
+
+            // Increase Yes button size
+            yesBtnSize += 0.3;
+            const yesBtn = document.getElementById('yesBtn');
+            yesBtn.style.transform = `scale(${yesBtnSize})`;
+
+            // If Yes button becomes too big, cover screen
+            if (yesBtnSize > 4) {
+                document.getElementById('yesBtn').style.position = 'fixed';
+                document.getElementById('yesBtn').style.width = '100vw';
+                document.getElementById('yesBtn').style.height = '100vh';
+                document.getElementById('yesBtn').style.top = '0';
+                document.getElementById('yesBtn').style.left = '0';
+                document.getElementById('yesBtn').style.borderRadius = '0';
+                document.getElementById('yesBtn').style.fontSize = '32px';
+                document.getElementById('noBtn').style.display = 'none';
+            } else {
+                // Move No button randomly
+                const noBtn = document.getElementById('noBtn');
+                const randomX = (Math.random() - 0.5) * 150;
+                const randomY = (Math.random() - 0.5) * 150;
+                noBtn.style.transform = `translate(${randomX}px, ${randomY}px)`;
+            }
+        }
+
+        function sayYes() {
+            document.getElementById('mainContainer').style.display = 'none';
+            document.getElementById('successScreen').style.display = 'flex';
+        }
+    </script>
+</body>
+</html>
