@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ကလေးလေး အကို့ကို ပြန်ချစ်နိုင်မလား</title>
+    <title>ကလေးလေး အကို့ကို ပြန်ချစ်နိုင်မလား 💕</title>
     <style>
         * {
             box-sizing: border-box;
@@ -12,7 +12,7 @@
             font-family: 'Pyidaungsu', 'Myanmar Text', sans-serif;
         }
         body {
-            background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 99%, #fecfef 100%);
+            background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 50%, #ff758c 100%);
             height: 100vh;
             display: flex;
             flex-direction: column;
@@ -21,7 +21,24 @@
             overflow: hidden;
             text-align: center;
             padding: 20px;
+            position: relative;
         }
+        
+        /* Falling Hearts Background Animation */
+        .heart-fall {
+            position: absolute;
+            top: -10vh;
+            font-size: 20px;
+            color: rgba(255, 255, 255, 0.7);
+            user-select: none;
+            z-index: 1;
+            animation: fall linear infinite;
+        }
+        @keyframes fall {
+            0% { transform: translateY(-10vh) translateX(0) rotate(0deg); opacity: 1; }
+            100% { transform: translateY(110vh) translateX(50px) rotate(360deg); opacity: 0; }
+        }
+
         .container {
             max-width: 400px;
             width: 100%;
@@ -29,22 +46,28 @@
             display: flex;
             flex-direction: column;
             align-items: center;
+            background: rgba(255, 255, 255, 0.85);
+            padding: 30px 20px;
+            border-radius: 25px;
+            box-shadow: 0 10px 30px rgba(214, 51, 132, 0.2);
+            backdrop-filter: blur(5px);
         }
         .illustration {
-            width: 160px;
-            height: 160px;
+            width: 150px;
+            height: 150px;
             margin-bottom: 20px;
             object-fit: cover;
             border-radius: 50%;
             box-shadow: 0 4px 15px rgba(0,0,0,0.15);
             background: white;
-            border: 4px solid #ffffff;
+            border: 4px solid #ff4d6d;
         }
         h1 {
-            font-size: 22px;
-            color: #d63384;
+            font-size: 21px;
+            color: #c9184a;
             margin-bottom: 25px;
             line-height: 1.5;
+            font-weight: bold;
         }
         .btn-group {
             display: flex;
@@ -76,9 +99,9 @@
             position: relative;
         }
         #pleadText {
-            margin-top: 25px;
-            font-size: 16px;
-            color: #c9184a;
+            margin-top: 15px;
+            font-size: 15px;
+            color: #d63384;
             height: 30px;
             font-weight: 600;
         }
@@ -89,39 +112,84 @@
             justify-content: center;
             max-width: 400px;
             width: 100%;
+            z-index: 10;
+            background: rgba(255, 255, 255, 0.9);
+            padding: 30px 20px;
+            border-radius: 25px;
+            box-shadow: 0 10px 30px rgba(214, 51, 132, 0.2);
         }
         .success-screen h1 {
-            font-size: 28px;
+            font-size: 26px;
             color: #ff007f;
             animation: bounce 1s infinite alternate;
             margin-bottom: 15px;
         }
         @keyframes bounce {
             from { transform: translateY(0); }
-            to { transform: translateY(-10px); }
+            to { transform: translateY(-8px); }
+        }
+
+        /* Romantic Modal Popup */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.5);
+            z-index: 100;
+            justify-content: center;
+            align-items: center;
+        }
+        .modal-content {
+            background: white;
+            padding: 25px;
+            border-radius: 20px;
+            text-align: center;
+            max-width: 320px;
+            width: 90%;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+            animation: popUp 0.3s ease;
+        }
+        @keyframes popUp {
+            0% { transform: scale(0.7); opacity: 0; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+        .modal-content h3 {
+            color: #d63384;
+            margin-bottom: 10px;
+            font-size: 20px;
+        }
+        .modal-content p {
+            color: #590d22;
+            font-size: 15px;
+            margin-bottom: 20px;
+            line-height: 1.4;
+        }
+        .modal-content button {
+            background: #ff4d6d;
+            color: white;
+            padding: 8px 20px;
+            font-size: 16px;
+            border-radius: 20px;
         }
     </style>
 </head>
 <body>
 
+    <!-- Falling Hearts Container -->
+    <div id="heartsContainer"></div>
+
     <div class="container" id="mainContainer">
-        <!-- ယောက်ျားလေး ပန်းစည်းနဲ့ ချစ်ခွင့်ပန်တဲ့ ချစ်စရာ ပုံ (Reliable SVG Graphic) -->
+        <!-- ယောက်ျားလေး ပန်းစည်းနဲ့ တောင်းပန်နေတဲ့ ချစ်စရာ ပုံ -->
         <svg class="illustration" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
-            <circle cx="100" cy="100" r="100" fill="#fff5f6"/>
-            <!-- Cute Proposing Character Art -->
+            <circle cx="100" cy="100" r="100" fill="#fff0f3"/>
             <g transform="translate(40, 35)">
-                <!-- Heart Floating -->
                 <path d="M60,20 C50,5 30,5 20,20 C10,35 20,55 60,85 C100,55 110,35 100,20 C90,5 70,5 60,20 Z" fill="#ff4d6d" opacity="0.8"/>
-                <!-- Character Body & Head -->
                 <circle cx="60" cy="50" r="25" fill="#ffdbac"/>
                 <path d="M45,45 Q60,35 75,45" fill="none" stroke="#5c4033" stroke-width="3" stroke-linecap="round"/>
                 <circle cx="52" cy="50" r="3" fill="#333"/>
                 <circle cx="68" cy="50" r="3" fill="#333"/>
-                <!-- Cute Smile -->
                 <path d="M56,58 Q60,63 64,58" fill="none" stroke="#d63384" stroke-width="2.5" stroke-linecap="round"/>
-                <!-- Body -->
-                <rect x="48" y="75" width="24" height="35" rx="8" fill="#4dabf7"/>
-                <!-- Bouquet of Flowers -->
+                <rect x="48" y="75" width="24" height="35" rx="8" fill="#ff758c"/>
                 <circle cx="85" cy="80" r="10" fill="#ff6b6b"/>
                 <circle cx="95" cy="70" r="8" fill="#ffa8a8"/>
                 <circle cx="95" cy="90" r="8" fill="#ff8787"/>
@@ -129,36 +197,57 @@
             </g>
         </svg>
         
-        <h1>ကလေးလေး အကို့ရဲ့အချစ်ကိုလက်ခံပြီး ပြန်ချစ်နိုင်မလား 💕</h1>
+        <h1>ကလေးလေး... အကို့ရဲ့အချစ်ကို လက်ခံပြီး ပြန်ချစ်နိုင်မလား 💕</h1>
         <div class="btn-group" id="btnGroup">
-            <button id="yesBtn" onclick="sayYes()">Yes 🥰</button>
+            <button id="yesBtn" onclick="showLovePopup()">Yes 🥰</button>
             <button id="noBtn" onclick="sayNo()">No 😢</button>
         </div>
         <div id="pleadText"></div>
     </div>
 
+    <!-- Romantic Modal Popup -->
+    <div class="modal" id="loveModal">
+        <div class="modal-content">
+            <h3>ရင်ခုန်သံအစစ်ပါ 💖</h3>
+            <p>မင်းက ကိုယ့်ရဲ့ တစ်ဦးတည်းသော အချစ်ဆုံးလေးပါပဲ ကလေးရယ်... 🥰</p>
+            <button onclick="goToSuccess()">ပျော်စရာလေးတွေ ကြည့်မယ် ✨</button>
+        </div>
+    </div>
+
     <div class="success-screen" id="successScreen">
-        <!-- ချစ်စရာ စုံတွဲ ချစ်တင်းနှီးနှောတဲ့ ပုံ (Reliable SVG Graphic) -->
+        <!-- ချစ်စရာ စုံတွဲ ရိုမန်တစ်ပုံ -->
         <svg class="illustration" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
             <circle cx="100" cy="100" r="100" fill="#fff0f3"/>
             <g transform="translate(30, 30)">
-                <!-- Big Love Hearts Background -->
-                <path d="M70,15 C55,-2 30,-2 15,15 C0,32 10,55 70,95 C130,55 140,32 125,15 C110,-2 85,-2 70,15 Z" fill="#ff8787" opacity="0.6"/>
-                <!-- Couple Hugging/Kissing Graphic -->
+                <path d="M70,15 C55,-2 30,-2 15,15 C0,32 10,55 70,95 C130,55 140,32 125,15 C110,-2 85,-2 70,15 Z" fill="#ff4d6d" opacity="0.7"/>
                 <circle cx="55" cy="65" r="22" fill="#ffdbac"/>
                 <circle cx="85" cy="65" r="22" fill="#ffdbac"/>
-                <!-- Kissing expression -->
                 <path d="M68,63 Q72,67 76,63" fill="none" stroke="#d63384" stroke-width="3" stroke-linecap="round"/>
-                <!-- Bodies locked -->
                 <path d="M35,95 Q55,80 70,95 Q85,80 105,95 Z" fill="#ff4d6d"/>
             </g>
         </svg>
         
         <h1>ယေးးး! အကို့ကိုချစ်တယ်ဆိုတာ သိပြီးသားပါဗျာ 😍💖</h1>
-        <p style="font-size: 18px; color: #590d22; margin-top: 10px;">အမြဲတမ်း ပျော်ရွှင်ရအောင် အကို ထိန်းသိမ်းပေးသွားပါမယ် ချစ်ရဆုံးရေ 🥰</p>
+        <p style="font-size: 16px; color: #590d22; margin-top: 10px; line-height: 1.5;">အမြဲတမ်း ပျော်ရွှင်ရအောင် အကို ထိန်းသိမ်းပေးသွားပါမယ် ချစ်ရဆုံးရေ 🥰</p>
     </div>
 
     <script>
+        // Generate Falling Hearts Automatically
+        function createHeart() {
+            const heart = document.createElement('div');
+            heart.classList.add('heart-fall');
+            heart.innerHTML = '❤️';
+            heart.style.left = Math.random() * 100 + 'vw';
+            heart.style.animationDuration = (Math.random() * 3 + 3) + 's';
+            heart.style.fontSize = (Math.random() * 15 + 15) + 'px';
+            document.getElementById('heartsContainer').appendChild(heart);
+            
+            setTimeout(() => {
+                heart.remove();
+            }, 6000);
+        }
+        setInterval(createHeart, 400);
+
         const pleadings = [
             "စဉ်းစားပါဦးနော်... အကို့ကို လှည့်တောင် မကြည့်ဘူးလား 🥺",
             "နောက်တစ်ခါ ထပ်စမ်းကြည့်ပါဦး ကလေးရယ် 😭",
@@ -175,16 +264,13 @@
         function sayNo() {
             noClickCount++;
             
-            // Show plead text
             const randomIndex = Math.floor(Math.random() * pleadings.length);
             document.getElementById('pleadText').innerText = pleadings[randomIndex];
 
-            // Increase Yes button size
             yesBtnSize += 0.3;
             const yesBtn = document.getElementById('yesBtn');
             yesBtn.style.transform = `scale(${yesBtnSize})`;
 
-            // If Yes button becomes too big, cover screen
             if (yesBtnSize > 4) {
                 document.getElementById('yesBtn').style.position = 'fixed';
                 document.getElementById('yesBtn').style.width = '100vw';
@@ -195,7 +281,6 @@
                 document.getElementById('yesBtn').style.fontSize = '32px';
                 document.getElementById('noBtn').style.display = 'none';
             } else {
-                // Move No button randomly
                 const noBtn = document.getElementById('noBtn');
                 const randomX = (Math.random() - 0.5) * 120;
                 const randomY = (Math.random() - 0.5) * 120;
@@ -203,7 +288,12 @@
             }
         }
 
-        function sayYes() {
+        function showLovePopup() {
+            document.getElementById('loveModal').style.display = 'flex';
+        }
+
+        function goToSuccess() {
+            document.getElementById('loveModal').style.display = 'none';
             document.getElementById('mainContainer').style.display = 'none';
             document.getElementById('successScreen').style.display = 'flex';
         }
